@@ -37,12 +37,8 @@
     "jshint": "^2.9.3"
   },
   "jshintConfig": {
-    // http://jshint.com/docs/options/
-    // This option prohibits the use of explicitly undeclared variables
     "undef": true,
-    // This options prohibits the use of == and != in favor of === and !==
     "eqeqeq": true,
-    // This option warns when you define and never use your variables
     "unused": true
   },
   "dependencies": {}
