@@ -157,7 +157,7 @@ describe('suncalc', function() {
 
     beforeEach(function() {
       solarCalc = new SolarCalc(
-        new Date('Jun 23 2015'),
+        new Date('Jun 23 2000'),
         82.4508,
         -62.5056,
         -4,
@@ -166,7 +166,7 @@ describe('suncalc', function() {
     });
 
     it('test leap year', function(){
-      assert.equal(true, solarCalc.sun.isLeapYear(2000));
+      assert.equal(true, solarCalc.goldenHourEnd.getTime());
     });
   });
 

@@ -1,3 +1,4 @@
+/*jslint node: true */
 'use strict';
 
 var Sun = require('./sun.js');
