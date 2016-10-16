@@ -34,7 +34,9 @@
     "eslint": "^0.16.0",
     "mocha": "^2.2.0",
     "istanbul": "^0.4.5",
-    "jshint": "^2.9.3"
+    "jshint": "^2.9.3",
+    "esprima": "^3.0.0",
+    "fs": "latest"
   },
   "jshintConfig": {
     // http://jshint.com/docs/options/
