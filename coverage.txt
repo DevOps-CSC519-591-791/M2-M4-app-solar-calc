@@ -1,0 +1,70 @@
+
+> solar-calc@1.0.3 test /Users/jianfeng/git/devop/solar-calc
+> npm run compile && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha
+
+
+> solar-calc@1.0.3 compile /Users/jianfeng/git/devop/solar-calc
+> npm run clean && ./node_modules/.bin/babel src --out-dir lib
+
+
+> solar-calc@1.0.3 clean /Users/jianfeng/git/devop/solar-calc
+> rm -rf lib
+
+src/moon.js -> lib/moon.js
+src/solarCalc.js -> lib/solarCalc.js
+src/sun.js -> lib/sun.js
+
+
+  suncalc
+    2015-03-08 in North Carolina
+      ✓ get solar noon
+      ✓ get golden hour start
+      ✓ get golden hour end
+      ✓ get night end
+      ✓ get nautical dawn
+      ✓ get dawn
+      ✓ get sunrise
+      ✓ get sunriseEnd
+      ✓ get sunsetStart
+      ✓ get sunset
+      ✓ get dusk
+      ✓ get nautical dusk
+      ✓ get night start
+      ✓ should get moon illuminosity
+      ✓ should get moon distance
+    2015-06-23 in extreme latitude
+      ✓ get solar noon
+      ✓ get golden hour start
+      ✓ get golden hour end
+      ✓ get night end
+      ✓ get nautical dawn
+      ✓ get dawn
+      ✓ get sunrise
+      ✓ get sunriseEnd
+      ✓ get sunsetStart
+      ✓ get sunset
+      ✓ get dusk
+      ✓ get nautical dusk
+      ✓ get night start
+      ✓ should get moon illuminosity
+      ✓ should get moon distance
+    2015-06-23 in extreme latitude
+      1) test leap year
+
+
+  30 passing (116ms)
+  1 failing
+
+  1) suncalc 2015-06-23 in extreme latitude test leap year:
+     AssertionError: true == 956707200000
+      at Context.<anonymous> (test/test.js:169:14)
+
+
+
+
+=============================== Coverage summary ===============================
+Statements   : 95.47% ( 358/375 )
+Branches     : 72.62% ( 61/84 )
+Functions    : 100% ( 74/74 )
+Lines        : 97.21% ( 314/323 )
+================================================================================
