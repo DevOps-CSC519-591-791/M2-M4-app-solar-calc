@@ -172,5 +172,3 @@ describe('suncalc', function() {
 
 });
 
-
-
