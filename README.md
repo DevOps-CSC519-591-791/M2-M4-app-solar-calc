@@ -1,4 +1,6 @@
 ```
+npm install
+npm clean
 npm run test
 npm run fuzz
 npm run lint
