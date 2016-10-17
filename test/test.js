@@ -166,7 +166,7 @@ describe('suncalc', function() {
     });
 
     it('test leap year', function(){
-      assert.equal(true, solarCalc.goldenHourEnd.getTime());
+      assert.equal(956707200000, solarCalc.goldenHourEnd.getTime());
     });
   });
 
