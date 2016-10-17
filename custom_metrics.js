@@ -1,6 +1,8 @@
 var esprima = require("esprima");
 var options = {tokens:true, tolerant: true, loc: true, range: true };
 var fs = require("fs");
+var maxConditions = 0;
+
 
 function main()
 {
@@ -8,10 +10,9 @@ function main()
 
 	if( args.length == 0 )
 	{
-		args = ["index.js"];
+		args = ["src/solarCalc.js"];
 	}
 	var filePath = args[0];
-	
 	complexity(filePath);
 
 	// Report
@@ -29,30 +30,31 @@ var builders = {};
 function ComplexityBuilder()
 {
 	this.StartLine = 0;
+	this.EndLine = 0;
 	this.FunctionName = "";
-	// The number of parameters for functions
-	this.ParameterCount  = 0,
-	// Number of if statements/loops + 1
-	this.SimpleCyclomaticComplexity = 0;
+	// Count the max number of conditions within an if statement in a function
+	this.MaxConditions = 0;
+	// Method includes more than 100 LOC
+	this.LongMethod = false;
+	// Check whether there is a security token in the code
+	this.SecurityTokenDetection = 0;
 	// The max depth of scopes (nested ifs, loops, etc)
-	this.MaxNestingDepth    = 0;
-	// The max number of conditions if one decision statement.
-	this.MaxConditions      = 0;
-
+	this.DuplicateCode = "";
+	
 	this.report = function()
 	{
 		console.log(
 		   (
 		   	"{0}(): {1}\n" +
 		   	"============\n" +
-			   "SimpleCyclomaticComplexity: {2}\t" +
-				"MaxNestingDepth: {3}\t" +
-				"MaxConditions: {4}\t" +
-				"Parameters: {5}\n\n"
+			   "MaxConditions: {2}\t" +
+			   "LongMethod: {3}\t" +
+			   "SecurityTokenDetection: {4}\t" +
+			   "DuplicateCode: {5}\n\n"
 			)
 			.format(this.FunctionName, this.StartLine,
-				     this.SimpleCyclomaticComplexity, this.MaxNestingDepth,
-			        this.MaxConditions, this.ParameterCount)
+				    this.MaxConditions, this.LongMethod,
+				    this.SecurityTokenDetection, this.DuplicateCode)
 		);
 	}
 };
@@ -75,7 +77,7 @@ function traverse(object, visitor)
 }
 
 // A function following the Visitor pattern.
-// Annotates nodes with parent objects.
+// Annotates nodes with parent objects (add each node's parent info into node, see output_with_parent_info.txt)
 function traverseWithParents(object, visitor)
 {
     var key, child;
@@ -88,7 +90,7 @@ function traverseWithParents(object, visitor)
             if (typeof child === 'object' && child !== null && key != 'parent') 
             {
             	child.parent = object;
-					traverseWithParents(child, visitor);
+				traverseWithParents(child, visitor);
             }
         }
     }
@@ -117,21 +119,40 @@ function complexity(filePath)
 {
 	var buf = fs.readFileSync(filePath, "utf8");
 	var ast = esprima.parse(buf, options);
-
 	var i = 0;
-	// Tranverse program with a function visitor.
+	// Traverse program with a function visitor.
 	traverseWithParents(ast, function (node) 
 	{
-		if (node.type === 'FunctionDeclaration') 
+		var builder = new ComplexityBuilder();
+		if (node.type === 'FunctionDeclaration' || node.type === 'MethodDefinition') 
 		{
-			var builder = new ComplexityBuilder();
-
-			builder.FunctionName = functionName(node);
+			builder.FunctionName = functionName(node, node.type);
 			builder.StartLine    = node.loc.start.line;
+			builder.EndLine 	 = node.loc.end.line;
+			var lineNum = builder.EndLine - builder.StartLine + 1;
+			if(lineNum >= 20){
+				builder.LongMethod = true;
+			}
 
-			builders[builder.FunctionName] = builder;
+			traverseWithParents(node, function(child){
+				if(child.type === "IfStatement"){
+					maxConditions++;
+					traverseWithParents(child, function(grandchild){
+						if(grandchild.operator === "&&" || grandchild.operator === "||"){
+							maxConditions++;
+						}
+					});
+				}
+				if(maxConditions > builder.MaxConditions){
+					builder.MaxConditions = maxConditions;
+				}
+				maxConditions = 0;
+			});
+
+			
 		}
-
+			//maxConditions++; // # of condition is 1 more than # of operator
+		builders[builder.FunctionName] = builder;
 	});
 
 }
@@ -178,11 +199,14 @@ function isDecision(node)
 }
 
 // Helper function for printing out function name.
-function functionName( node )
+function functionName( node, type )
 {
-	if( node.id )
+	if( type === 'FunctionDeclaration' && node.id )
 	{
 		return node.id.name;
+	}
+	if( type === 'MethodDefinition' && node.key ){
+		return node.key.name;
 	}
 	return "anon function @" + node.loc.start.line;
 }
