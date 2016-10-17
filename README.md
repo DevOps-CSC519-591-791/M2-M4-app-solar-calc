@@ -1,5 +1,6 @@
 ```
 npm run test
+npm run fuzz
 npm run lint
 ```
 
