@@ -2,7 +2,8 @@ var esprima = require("esprima");
 var options = {tokens:true, tolerant: true, loc: true, range: true };
 var fs = require("fs");
 var maxConditions = 0;
-
+var numOfIfStatement = 0;
+var numOfLoops = 0;
 
 function main()
 {
@@ -36,8 +37,8 @@ function ComplexityBuilder()
 	this.MaxConditions = 0;
 	// Method includes more than 100 LOC
 	this.LongMethod = false;
-	// Check whether there is a security token in the code
-	this.SecurityTokenDetection = 0;
+	// Number of if statements/loops + 1
+	this.SimpleCyclomaticComplexity = 0;
 	// The max depth of scopes (nested ifs, loops, etc)
 	this.DuplicateCode = "";
 	
@@ -49,12 +50,12 @@ function ComplexityBuilder()
 		   	"============\n" +
 			   "MaxConditions: {2}\t" +
 			   "LongMethod: {3}\t" +
-			   "SecurityTokenDetection: {4}\t" +
+			   "SimpleCyclomaticComplexity: {4}\t" +
 			   "DuplicateCode: {5}\n\n"
 			)
 			.format(this.FunctionName, this.StartLine,
 				    this.MaxConditions, this.LongMethod,
-				    this.SecurityTokenDetection, this.DuplicateCode)
+				    this.SimpleCyclomaticComplexity, this.DuplicateCode)
 		);
 	}
 };
@@ -135,6 +136,12 @@ function complexity(filePath)
 			}
 
 			traverseWithParents(node, function(child){
+				if(isIfStatement(child)){
+					numOfIfStatement++;
+				}
+				if(isLoop(child)){
+					numOfLoops++;
+				}
 				if(child.type === "IfStatement"){
 					maxConditions++;
 					traverseWithParents(child, function(grandchild){
@@ -148,6 +155,14 @@ function complexity(filePath)
 				}
 				maxConditions = 0;
 			});
+
+			// avoid dividing by 0
+			if(numOfLoops === 0){
+				numOfLoops = 1;
+			}
+			builder.SimpleCyclomaticComplexity = numOfIfStatement / numOfLoops + 1;
+			numOfIfStatement = 0;
+			numOfLoops = 0;
 
 			
 		}
@@ -176,9 +191,7 @@ function childrenLength(node)
 	return count;
 }
 
-
-// Helper function for checking if a node is a "decision type node"
-function isDecision(node)
+function isIfStatement(node)
 {
 	if( node.type == 'IfStatement' )
 	{
@@ -189,7 +202,11 @@ function isDecision(node)
 		}
 		return true;
 	}
+	return false;
+}
 
+function isLoop(node)
+{
 	if( node.type == 'ForStatement' || node.type == 'WhileStatement' ||
 		 node.type == 'ForInStatement' || node.type == 'DoWhileStatement')
 	{
