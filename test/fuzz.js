@@ -27,7 +27,7 @@ describe('suncalc', function() {
       assert.equal(1425854506000, solarCalc.goldenHourStart.getTime());
     });
 
-     it('get golden hour end', function() {
+    it('get golden hour end', function() {
       assert.equal(1425816570000, solarCalc.goldenHourEnd.getTime());
     });
 
@@ -155,11 +155,34 @@ describe('suncalc', function() {
     });
   });
 
+  // Start the fuzz testing
   describe('fuzz testing the sun.js', function() {
     var isLeapYear = sun.__get__('isLeapYear');
+    var calcDoyFromJD = sun.__get__('calcDoyFromJD');
+    var calcGeomMeanLongSun = sun.__get__('calcGeomMeanLongSun');
+    var dayString = sun.__get__('dayString')
+
     it('test leap year', function(){
-      assert.equal(true, isLeapYear(2000));
+    	for(var i = 1500; i<2016;i++)
+    		isLeapYear(i);
     });
+
+    it('test calcDoyFromJD', function(){
+    	for(var i = 0; i < 10000;i++)
+    		calcDoyFromJD(Math.random()*(99161)+ 2199161);
+    });
+
+    it('test calcGeomMeanLongSun', function(){
+    	for(var i = 0; i < 15;i++)
+    		calcGeomMeanLongSun(Math.random()*(10));
+    });
+
+    it('test dayString', function(){
+    	for(var i = 0; i < 15;i++)
+    		dayString(Math.random()*(1256) + 880000);  // small number case
+    		dayString(Math.random()*(2211) + 2299000); // large number case
+    });
+
   });
 
 });
