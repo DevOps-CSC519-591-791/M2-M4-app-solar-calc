@@ -4,6 +4,9 @@ npm clean
 npm run test
 npm run fuzz
 npm run lint
+node custom_metrics.js
+node custom_metrics.js src/sun.js 
+node custom_metrics.js src/moon.js 
 ```
 
 # solar-calc [![npm](https://img.shields.io/npm/v/solar-calc.svg)](https://www.npmjs.com/package/solar-calc) [![Build Status](https://travis-ci.org/jonhester/solar-calc.svg)](https://travis-ci.org/jonhester/solar-calc/builds)
