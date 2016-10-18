@@ -9,6 +9,7 @@
     "test": "npm run compile && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test/test.js",
     "fuzz": "npm run compile && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test/fuzz.js",
     "lint": "./node_modules/.bin/eslint src",
+    "metrics": "node custom_metrics.js",
     "clean": "rm -rf lib"
   },
   "repository": {

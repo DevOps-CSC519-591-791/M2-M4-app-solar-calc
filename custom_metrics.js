@@ -8,13 +8,13 @@ var numOfLoops = 0;
 
 function main()
 {
-	var args = process.argv.slice(2);
-
+	var args = process.env.npm_config_filePath;
 	if( args.length == 0 )
 	{
-		args = ["src/solarCalc.js"];
+		args = "src/solarCalc.js";
 	}
-	var filePath = args[0];
+	var filePath = args;
+	console.log(("=====File Path: {0}====================").format(filePath));
 	complexity(filePath);
 
 	// Report
