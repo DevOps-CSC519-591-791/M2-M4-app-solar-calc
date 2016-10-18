@@ -23,29 +23,28 @@ s22="${s21%?}"
 # echo "$s12 < 94.9" |bc -l
 # echo "$s12 < 95.9" |bc -l
 
-$result=1
-if [[ $(echo "$s12 < 94.9" |bc -l) == $result ]]; then
+if [[ $(echo "$s12 < 94.9" |bc -l) == 1 ]]; then
 	echo "$s12% Statements coverage is smaller than threshold, commit refused!"
 	exit 1
 else
 	echo "$s12% Statements coverage is larger than threshold"
 fi
 
-if [[ $(echo "$s22 < 95.9" |bc -l) == $result ]]; then
+if [[ $(echo "$s22 < 95.9" |bc -l) == 1 ]]; then
 	echo "$s22% Statements coverage is smaller than threshold, commit refused!"
 	exit 1
 else
 	echo "$s22% Statements coverage is larger than threshold"
 fi
 
-if [[ $(echo "$s32 > 0" |bc -l) == $result ]]; then
+if [[ $(echo "$s32 > 0" |bc -l) == 1 ]]; then
 	echo "The code contains $s32 errors, commit refused!"
 	exit 1
 else
 	echo "The code contains $s32 errors"
 fi
 
-if [[ $(echo "$s33 > 0" |bc -l) == $result ]]; then
+if [[ $(echo "$s33 > 0" |bc -l) == 1 ]]; then
 	echo "The code contains $s33 warnings, commit refused!"
 	exit 1
 else
