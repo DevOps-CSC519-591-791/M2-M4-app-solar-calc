@@ -1,6 +1,7 @@
 var esprima = require("esprima");
 var options = {tokens:true, tolerant: true, loc: true, range: true };
 var fs = require("fs");
+var exec = require('child_process').exec;
 var maxConditions = 0;
 var numOfIfStatement = 0;
 var numOfLoops = 0;
@@ -23,6 +24,12 @@ function main()
 		builder.report();
 	}
 
+	console.log("=====Duplicated Code Detection====================");
+	var cmd = "jsinspect -t 30 -i ./src";
+	exec(cmd, function(error, stdout, stderr) {
+	  // command output is in stdout
+	  console.log(stdout);
+	});
 }
 
 var builders = {};
