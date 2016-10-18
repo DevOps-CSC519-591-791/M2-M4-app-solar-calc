@@ -4,13 +4,6 @@ import re
 s1 = subprocess.Popen(["npm", "run", "fuzz"], stdout=subprocess.PIPE).communicate()[0]
 s2 = subprocess.Popen(["npm", "run", "lint"], stdout=subprocess.PIPE).communicate()[0]
 
-# print s1
-# print len(s1)
-
-# print s2
-# print len(s2)
-# print len(output)
-
 s1_match_obj = re.search(r'Statements.*([\d\.]*)%', s1)
 s2_match_obj = re.search(r'(\d+) errors, (\d+) warnings', s2)
 

@@ -299,11 +299,11 @@ function moonPos(date) {
     Sr += T45AR[i] * Eterm * cosd(rev(T45AD[i] * D + T45AM[i] * M + T45AMP[i] * MP + T45AF[i] * F));
   }
   var Sb = 0.0;
-  for (var i = 0; i < 60; i++) {
-    var Eterm = 1;
-    if (Math.abs(T45BM[i]) === 1) Eterm = E;
-    if (Math.abs(T45BM[i]) === 2) Eterm = E2;
-    Sb += T45BL[i] * Eterm * sind(rev(T45BD[i] * D + T45BM[i] * M + T45BMP[i] * MP + T45BF[i] * F));
+  for (var j = 0; j < 60; j++) {
+    var Eterm1 = 1;
+    if (Math.abs(T45BM[j]) === 1) Eterm1 = E;
+    if (Math.abs(T45BM[j]) === 2) Eterm1 = E2;
+    Sb += T45BL[j] * Eterm1 * sind(rev(T45BD[j] * D + T45BM[j] * M + T45BMP[j] * MP + T45BF[j] * F));
   }
   // Additional additive terms
   Sl = Sl + 3958 * sind(rev(A1)) + 1962 * sind(rev(LP - F)) + 318 * sind(rev(A2));
