@@ -163,24 +163,24 @@ describe('suncalc', function() {
     var dayString = sun.__get__('dayString')
 
     it('test leap year', function(){
-    	for(var i = 1500; i<2016;i++)
-    		isLeapYear(i);
+      for(var i = 1500; i<2016;i++)
+        isLeapYear(i);
     });
 
     it('test calcDoyFromJD', function(){
-    	for(var i = 0; i < 10000;i++)
-    		calcDoyFromJD(Math.random()*(99161)+ 2199161);
+      for(var i = 0; i < 10000;i++)
+        calcDoyFromJD(Math.random()*(99161)+ 2199161);
     });
 
     it('test calcGeomMeanLongSun', function(){
-    	for(var i = 0; i < 15;i++)
-    		calcGeomMeanLongSun(Math.random()*(10));
+      for(var i = 0; i < 15;i++)
+        calcGeomMeanLongSun(Math.random()*(10));
     });
 
     it('test dayString', function(){
-    	for(var i = 0; i < 15;i++)
-    		dayString(Math.random()*(1256) + 880000);  // small number case
-    		dayString(Math.random()*(2211) + 2299000); // large number case
+      for(var i = 0; i < 15;i++)
+        dayString(Math.random()*(1256) + 880000);  // small number case
+        dayString(Math.random()*(2211) + 2299000); // large number case
     });
 
   });
