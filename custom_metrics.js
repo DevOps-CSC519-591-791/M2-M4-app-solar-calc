@@ -46,8 +46,6 @@ function ComplexityBuilder()
 	this.LongMethod = false;
 	// Number of if statements/loops + 1
 	this.SimpleCyclomaticComplexity = 0;
-	// The max depth of scopes (nested ifs, loops, etc)
-	this.DuplicateCode = "";
 	
 	this.report = function()
 	{
@@ -57,12 +55,11 @@ function ComplexityBuilder()
 		   	"============\n" +
 			   "MaxConditions: {2}\t" +
 			   "LongMethod: {3}\t" +
-			   "SimpleCyclomaticComplexity: {4}\t" +
-			   "DuplicateCode: {5}\n\n"
+			   "SimpleCyclomaticComplexity: {4}\n\n"
 			)
 			.format(this.FunctionName, this.StartLine,
 				    this.MaxConditions, this.LongMethod,
-				    this.SimpleCyclomaticComplexity, this.DuplicateCode)
+				    this.SimpleCyclomaticComplexity)
 		);
 	}
 };
