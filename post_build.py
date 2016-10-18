@@ -42,5 +42,5 @@ if s2_match_obj:
 else:
 	report += "No error or warning\n"
 
-report += "========== End of Report =========="
+report += "========== End of Report ==========\n\n"
 print report
