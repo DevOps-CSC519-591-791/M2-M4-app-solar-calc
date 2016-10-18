@@ -9,7 +9,7 @@ var numOfLoops = 0;
 function main()
 {
 	var args = process.env.npm_config_filePath;
-	if( args.length == 0 )
+	if( args === undefined )
 	{
 		args = "src/solarCalc.js";
 	}
