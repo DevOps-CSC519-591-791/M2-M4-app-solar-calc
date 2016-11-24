@@ -1,5 +1,6 @@
 'use strict';
-
+//change a line here
+// add a line here
 class Moon {
   constructor(date, latitude, longitude) {
     this.date = date;
@@ -25,6 +26,7 @@ class Moon {
 // I accept no liability for any errors in my coding but please
 // let me know of any errors you find. My address is on my home page.
 
+//add a line around 28
 function getJD(date) {
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
