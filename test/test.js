@@ -24,7 +24,7 @@ describe('suncalc', function() {
       assert.equal(1425854506000, solarCalc.goldenHourStart.getTime());
     });
 
-     it('get golden hour end', function() {
+    it('get golden hour end', function() {
       assert.equal(1425816570000, solarCalc.goldenHourEnd.getTime());
     });
 
