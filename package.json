@@ -37,9 +37,11 @@
     "mocha": "^2.2.0",
     "istanbul": "^0.4.5",
     "esprima": "^3.0.0",
-    "rewire":"2.5.2",
+    "rewire": "2.5.2",
     "fs": "latest",
     "jsinspect": "0.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "mochawesome": "~1.5.4"
+  }
 }
