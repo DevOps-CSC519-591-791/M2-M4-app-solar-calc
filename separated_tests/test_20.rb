@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-    it('get nautical dawn', function() {
+    it('get nautical dawn2', function() {
       assert.equal(1425859200000, solarCalc.nauticalDawn.getTime());
     });
   });

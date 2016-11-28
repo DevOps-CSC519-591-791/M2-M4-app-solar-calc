@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-    it('get night start', function() {
+    it('get night start2', function() {
       assert.equal(1445385600000, solarCalc.nightStart.getTime());
     });
   });

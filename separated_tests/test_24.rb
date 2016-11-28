@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-    it('get sunsetStart', function() {
+    it('get sunsetStart2', function() {
       assert.equal(1441411200000, solarCalc.sunsetStart.getTime());
     });
   });

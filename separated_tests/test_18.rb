@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-     it('get golden hour end', function() {
+     it('get golden hour end2', function() {
       assert.equal(1430006400000, solarCalc.goldenHourEnd.getTime());
     });
   });

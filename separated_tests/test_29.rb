@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-    it('should get moon illuminosity', function() {
+    it('should get moon illuminosity2', function() {
       assert.equal(22, Math.round(solarCalc.lunarIlluminosity * 100));
     });
   });

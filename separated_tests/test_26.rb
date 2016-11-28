@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-    it('get dusk', function() {
+    it('get dusk2', function() {
       assert.equal(1442707200000, solarCalc.dusk.getTime());
     });
   });

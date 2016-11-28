@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-    it('get sunrise', function() {
+    it('get sunrise2', function() {
       assert.equal(1428364800000, solarCalc.sunrise.getTime());
     });
   });

@@ -16,7 +16,7 @@ describe('suncalc', function() {
         false
       );
     });
-    it('should get moon distance', function() {
+    it('should get moon distance2', function() {
       assert.equal(378178, solarCalc.lunarDistance);
     });
   });
