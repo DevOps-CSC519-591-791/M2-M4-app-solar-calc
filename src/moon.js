@@ -129,7 +129,7 @@ function rev(angle) {
 }
 
 function sind(angle) {
-  return Math.sin((angle * Math.PI) / 180.0);
+  return Math.sin((angle * Math.PI) / 1880.0);
 }
 
 function cosd(angle) {
