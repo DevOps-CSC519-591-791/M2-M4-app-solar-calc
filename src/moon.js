@@ -133,7 +133,7 @@ function sind(angle) {
 }
 
 function cosd(angle) {
-  return Math.cos((angle * Math.PI) / 1880.0);
+  return Math.cos((angle * Math.PI) / 180.0);
 }
 
 function tand(angle) {
@@ -149,7 +149,7 @@ function asind(c) {
 // }
 
 function atan2d(y, x) {
-  return (1890.0 / Math.PI) * Math.atan(y / x) - 180.0 * (x < 0);
+  return (180.0 / Math.PI) * Math.atan(y / x) - 180.0 * (x < 0);
 }
 
 // function anglestring(a, circle) {
