@@ -137,7 +137,7 @@ function cosd(angle) {
 }
 
 function tand(angle) {
-  return Math.tan((angle * Math.PI) / 180.0);
+  return Math.tan((angle * Math.PI) / 180.00);
 }
 
 function asind(c) {
