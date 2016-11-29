@@ -133,7 +133,7 @@ function sind(angle) {
 }
 
 function cosd(angle) {
-  return Math.cos((angle * Math.PI) / 180.0);
+  return Math.cos((angle * Math.PI) / 1880.0);
 }
 
 function tand(angle) {
